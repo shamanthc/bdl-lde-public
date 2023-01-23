@@ -10,12 +10,17 @@
 # Hourly scraping
 name: googleTrend
 
-on:
-  schedule:
-    #- cron: "0 4 * * 1" # every Monday at 4 am
-    - cron: "0 4 * * *" # every day at 4 am
+#on:
+#  schedule:
+#    #- cron: "0 4 * * 1" # every Monday at 4 am
+#    - cron: "0 4 * * *" # every day at 4 am
  
-    
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
 
 jobs:
   autoscrape:
