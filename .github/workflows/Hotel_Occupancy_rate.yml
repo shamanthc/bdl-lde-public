@@ -1,0 +1,52 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+#
+# See https://github.com/r-lib/actions/tree/master/examples#readme for
+# additional example workflows available for the R community.
+
+
+# Daily scraping
+name: Hotel Occupancy rate
+
+#on:
+#  schedule:
+#    - cron: "0 4 * * *" # every day at 4 am
+ 
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+
+jobs:
+  autoscrape:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Load repo and install R
+    steps:
+    - uses: actions/checkout@v3
+    - uses: r-lib/actions/setup-r@v2
+
+    # Set-up R
+    - name: Install packages
+      run: |
+        R -e 'install.packages("dplyr")'
+    # Run R script
+    - name: Hotel Occupancy Rate
+      run: Rscript Hotel_Occupancy_rate.R
+
+    # Add new files in data folder, commit along with other modified files, push
+    - name: Commit files
+      run: |
+        git config --local user.name github-actions
+        git config --local user.email "actions@github.com"
+        git add data/*
+        git commit -am "GH ACTION Autorun $(date)"
+        git push origin main
+      env:
+        REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        username: github-actions
