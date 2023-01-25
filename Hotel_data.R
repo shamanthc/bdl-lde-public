@@ -28,37 +28,37 @@ url_link6 <- "http://www.mtc-currentperformance.com/HotelDataXML.aspx?querytype=
 
 
 dt1 <- read.csv(url(url_link1),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt1)[1] <- "Year"
 dt1 <- dt1 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt2 <- read.csv(url(url_link2),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt2)[1] <- "Year"
 dt2 <- dt2 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt3 <- read.csv(url(url_link3),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt3)[1] <- "Year"
 dt3 <- dt3 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt4 <- read.csv(url(url_link4),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt4)[1] <- "Year"
 dt4 <- dt4 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt5 <- read.csv(url(url_link5),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt5)[1] <- "Year"
 dt5 <- dt5 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt6 <- read.csv(url(url_link6),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt6)[1] <- "Year"
 dt6 <- dt6 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
@@ -97,37 +97,37 @@ url_link6 <- "http://www.mtc-currentperformance.com/HotelDataXML.aspx?querytype=
 
 
 dt1 <- read.csv(url(url_link1),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt1)[1] <- "Year"
 dt1 <- dt1 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt2 <- read.csv(url(url_link2),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt2)[1] <- "Year"
 dt2 <- dt2 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt3 <- read.csv(url(url_link3),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt3)[1] <- "Year"
 dt3 <- dt3 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt4 <- read.csv(url(url_link4),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt4)[1] <- "Year"
 dt4 <- dt4 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt5 <- read.csv(url(url_link5),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt5)[1] <- "Year"
 dt5 <- dt5 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt6 <- read.csv(url(url_link6),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt6)[1] <- "Year"
 dt6 <- dt6 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
@@ -162,43 +162,45 @@ url_link6 <- "http://www.mtc-currentperformance.com/HotelDataXML.aspx?querytype=
 
 
 dt1 <- read.csv(url(url_link1),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt1)[1] <- "Year"
 dt1 <- dt1 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt2 <- read.csv(url(url_link2),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt2)[1] <- "Year"
 dt2 <- dt2 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt3 <- read.csv(url(url_link3),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt3)[1] <- "Year"
 dt3 <- dt3 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt4 <- read.csv(url(url_link4),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt4)[1] <- "Year"
 dt4 <- dt4 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt5 <- read.csv(url(url_link5),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt5)[1] <- "Year"
 dt5 <- dt5 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 dt6 <- read.csv(url(url_link6),header = T, check.names = F)%>%
-  select_if(~ !any(is.na(.)))
+  select(where(~ any(!is.na(.))))
 colnames(dt6)[1] <- "Year"
 dt6 <- dt6 %>% 
   tidyr::pivot_longer(!c(Year,Month), names_to = "GEO", values_to = "Value")
 
 Revenue_per_room <- rbind(dt1, dt2, dt3, dt4, dt5, dt6)%>% dplyr::mutate("Type" = "Revenue per Available Room")
 
+# Combine all three datasets
+#============================
 Hotel_data <- rbind(Hotel_occupancy_rate, Average_daily_rate, Revenue_per_room)
 
 # save data
