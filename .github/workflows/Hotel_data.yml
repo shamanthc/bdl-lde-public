@@ -48,7 +48,7 @@ jobs:
         git fetch
         git add Data/*
         git commit -am "GH ACTION Autorun $(date)"
-        git push -f origin main
+        git push origin master --force 
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
         username: github-actions
