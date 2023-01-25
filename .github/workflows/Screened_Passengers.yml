@@ -35,7 +35,7 @@ jobs:
     # Set-up R
     - name: Install packages
       run: |
-        R -e 'install.packages("rvest")'
+        R -e 'install.packages(c("rvest", "dplyr", "tidyr"))'
     # Run R script
     - name: Screened Passengers
       run: Rscript Screened_Passengers.R
