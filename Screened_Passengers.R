@@ -47,4 +47,4 @@ dt2 <- dt1%>%mutate(month=month(Date), day = day(Date))%>%
   select(date= Date_new, Airport_details, count)
 
 
-write.csv(dt2, file   = paste0("Data/Screened Passengers.csv")  , row.names = F)
+write.csv(dt2, file   = paste0("Data/Screened_Passengers.csv")  , row.names = F)
