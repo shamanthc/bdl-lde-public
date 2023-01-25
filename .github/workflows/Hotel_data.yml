@@ -34,7 +34,8 @@ jobs:
     # Set-up R
     - name: Install packages
       run: |
-        R -e 'install.packages(c("dplyr", "tidyr"))'
+        R -e 'install.packages("tidyr")'
+        R -e 'install.packages("dplyr")'
     # Run R script
     - name: Hotel data
       run: Rscript Hotel_data.R
@@ -44,10 +45,9 @@ jobs:
       run: |
         git config --local user.name github-actions
         git config --local user.email "actions@github.com"
-        git fetch
         git add Data/*
         git commit -am "GH ACTION Autorun $(date)"
-        git push -f origin main
+        git push origin main
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
         username: github-actions
