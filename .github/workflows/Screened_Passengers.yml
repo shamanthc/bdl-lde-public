@@ -10,16 +10,15 @@
 # Hourly scraping
 name: Screened Passengers
 
-#on:
-#  schedule:
-#    #- cron: "0 4 * * 1" # every Monday at 4 am
-#    - cron: "0 3 * * *" # every day at 3 am
- 
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+  schedule:
+    - cron: "0 3 * * *" # every day at 3 am
+ 
+#on:
+#  push:
+#    branches: [main, master]
+#  pull_request:
+#    branches: [main, master]
 
 
 jobs:
