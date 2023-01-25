@@ -1,4 +1,6 @@
 library(rvest)
+library(tidyr)
+library(dplyr)
 
 webpage <- read_html("https://www.catsa-acsta.gc.ca/en/screened-passenger-data")
 
