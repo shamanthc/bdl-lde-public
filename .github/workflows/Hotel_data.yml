@@ -8,7 +8,7 @@
 
 
 # Daily scraping
-name: Hotel Occupancy rate
+name: Hotel data
 
 #on:
 #  schedule:
@@ -34,10 +34,10 @@ jobs:
     # Set-up R
     - name: Install packages
       run: |
-        R -e 'install.packages("dplyr")'
+        R -e 'install.packages(c("dplyr", "tidyr))'
     # Run R script
-    - name: Hotel Occupancy Rate
-      run: Rscript Hotel_Occupancy_rate.R
+    - name: Hotel data
+      run: Rscript Hotel_data.R
 
     # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
