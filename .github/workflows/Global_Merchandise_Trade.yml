@@ -35,10 +35,17 @@ jobs:
     - name: Install packages
       run: |
         R -e 'install.packages("dplyr")'
+        
+    - name: Delete old file
+      run: |
+        R -e 'unlink("Data/Global_Merchandise_Trade.xlsx")'
    
     # Run R script
     - name: Global Merchandise Trade
       run: Rscript Global_Merchandise_Trade.R
+      
+    - name: Add timestamp
+      run: echo "Last updated:$(date)" >> README.md
 
     # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
@@ -47,7 +54,7 @@ jobs:
         git config --local user.email "actions@github.com"
         git pull
         git add Data/*
-        git commit -am "GH ACTION Autorun $(date)"
+        git commit -am "GH ACTION Autorun $(date)" -f
         git push origin main
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
