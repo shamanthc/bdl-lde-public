@@ -52,7 +52,7 @@ jobs:
       run: |
         git config --local user.name github-actions
         git config --local user.email "actions@github.com"
-        git pull
+        git pull --rebase origin main
         git add Data/*
         git commit -am "GH ACTION Autorun $(date)" -f
         git push origin main
