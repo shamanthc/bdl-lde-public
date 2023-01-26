@@ -46,13 +46,16 @@ jobs:
       
     - name: Add timestamp
       run: echo "Last updated:$(date)" >> README.md
+      
+    - name: Remove file
+      run: git rm Data/Global_Merchandise_Trade.xlsx
 
     # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
       run: |
         git config --local user.name github-actions
         git config --local user.email "actions@github.com"
-        git pull --rebase origin main
+        git pull
         git add Data/*
         git commit -am "GH ACTION Autorun $(date)" -f
         git push origin main
