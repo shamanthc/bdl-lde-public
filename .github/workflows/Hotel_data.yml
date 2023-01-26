@@ -10,15 +10,15 @@
 # Daily scraping
 name: Hotel data
 
-on:
-  schedule:
-    - cron: "0 2 * * *" # every day at 2 am
- 
 #on:
-#  push:
-#    branches: [main, master]
-# pull_request:
-#    branches: [main, master]
+#  schedule:
+#    - cron: "0 2 * * *" # every day at 2 am
+ 
+on:
+  push:
+    branches: [main, master]
+ pull_request:
+    branches: [main, master]
 
 
 jobs:
@@ -42,13 +42,13 @@ jobs:
 
     # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
-      run: |
+      run: | 
         git config --local user.name github-actions
         git config --local user.email "actions@github.com"
-        git fetch
+        git pull origin main
         git add Data/*
         git commit -am "GH ACTION Autorun $(date)"
-        git push origin master --force 
+        git push origin main --force 
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
         username: github-actions
