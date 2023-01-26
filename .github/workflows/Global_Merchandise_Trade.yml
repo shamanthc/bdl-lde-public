@@ -56,7 +56,7 @@ jobs:
       run: |
         git config --local user.name github-actions
         git config --local user.email "actions@github.com"
-        git pull --rebase
+        git pull
         git add Data/*
         git commit -am "GH ACTION Autorun $(date)" --allow-empty
         git push origin main
