@@ -37,7 +37,7 @@ jobs:
         R -e 'install.packages("dplyr")'
    
     # Run R script
-    - name: Revenue ton miles
+    - name: Global Merchandise Trade
       run: Rscript Global_Merchandise_Trade.R
 
     # Add new files in data folder, commit along with other modified files, push
