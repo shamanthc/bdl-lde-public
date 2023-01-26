@@ -48,7 +48,7 @@ jobs:
       run: Rscript Global_Merchandise_Trade.R
       
     - name: Add timestamp
-      run: echo "Last updated:$(date)" >> README.md
+      run: echo "Global Merchandise Trade Last updated:$(date)" >> README.md
       
 
     # Add new files in data folder, commit along with other modified files, push
