@@ -9,3 +9,4 @@ Global Merchandise Trade Last updated:Wed Feb  1 02:56:14 UTC 2023
 Global Merchandise Trade Last updated:Thu Feb  2 02:44:56 UTC 2023
 Global Merchandise Trade Last updated:Fri Feb  3 02:48:35 UTC 2023
 Global Merchandise Trade Last updated:Sat Feb  4 02:37:26 UTC 2023
+Global Merchandise Trade Last updated:Sun Feb  5 02:49:46 UTC 2023
