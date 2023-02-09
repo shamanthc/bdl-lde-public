@@ -29,7 +29,7 @@ names(data_n) <- str_replace_all(names(data_n), ":", "_")
 
 data_n = data_n[,-3]
 colnames(data_n)[2] = "Category"
-data_n$20_January_2023__15_43_07
+
 #data_new = data_n %>%  tidyr::pivot_longer(!c(data_n[1],"Category"), names_to = "Year_Month", values_to = "Volumes")
 data_new = data_n %>% 
   tidyr::pivot_longer(!c(colnames(data_n)[1], "Category"), names_to = "Year_Month", values_to = "Volumes")
