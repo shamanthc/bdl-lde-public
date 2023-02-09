@@ -4,7 +4,7 @@ library(janitor)
 library(readxl)
 
 
-destfile <- "Data/Global_Merchandise_Trade.xlsx"
+destfile <- "Global_Merchandise_Trade.xlsx"
 
 url = "https://www.cpb.nl/sites/default/files/omnidownload/CPB-World-Trade-Monitor-April-2022.xlsx"
 
@@ -86,28 +86,7 @@ Final_Data = Final_Data %>%  dplyr::rename("Date" = Year_Month)
 
 
 Final_Data$Prices = as.numeric(Final_Data$Prices)
-result <- Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01")) %>% 
-  mutate(date = as.Date(Date)) %>%
-  arrange(GEO, Category, Date) %>%
-  group_by(GEO,Category) %>%
-  mutate(Price_YoY=(Prices-lag(Prices))/lag(Prices))
 
-
-result = Final_Data %>% dplyr::group_by(Date) %>%  dplyr::arrange(GEO,Category) %>% dplyr::mutate("Year" = lubridate::year(Date),
-                                                                                                  "Month" = lubridate::month(Date)) %>% 
-dplyr::mutate(V_L = lag(Volumes, order_by = c("Year","Month"), n=12))
-
-
-
-
-df = Final_Data %>% group_by(GEO,Category,month=month(Date)) %>%
-  arrange(date) %>%
-  mutate(yearOverYear=value/lag(value,1))
-
-df = Final_Data %>% group_by(month=month(Date)) %>%
-  arrange(Date) %>%
-  mutate(yearOverYear=Volumes/lag(Volumes,1)) %>%
-  ungroup() %>% arrange(Date)
 
 YearOverYear<-function (x,periodsPerYear){
   if(NROW(x)<=periodsPerYear){
@@ -129,11 +108,4 @@ Final_Data = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
 
 
 #write_csv(Final_Data, file = "C:/Users/dsingh/Files to save/Global_merchandise_trade.csv")
-write.csv(Final_Data, file   = paste0("Data/Global_merchandise_trade.csv")  , row.names = F)
-
-
-
-
-
-
-
+write.csv(Final_Data, file   = paste0("Global_merchandise_trade.csv")  , row.names = F)
