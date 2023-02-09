@@ -4,7 +4,7 @@ library(janitor)
 library(readxl)
 
 
-destfile <- "Global_Merchandise_Trade.xlsx"
+destfile <- "Data/Global_Merchandise_Trade.xlsx"
 
 url = "https://www.cpb.nl/sites/default/files/omnidownload/CPB-World-Trade-Monitor-April-2022.xlsx"
 
@@ -108,4 +108,4 @@ Final_Data = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
 
 
 #write_csv(Final_Data, file = "C:/Users/dsingh/Files to save/Global_merchandise_trade.csv")
-write.csv(Final_Data, file   = paste0("Global_merchandise_trade.csv")  , row.names = F)
+write.csv(Final_Data, file   = paste0("Data/Global_merchandise_trade.csv")  , row.names = F)
