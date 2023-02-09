@@ -6,9 +6,10 @@ library(readxl)
 
 destfile <- "Data/Global_Merchandise_Trade.xlsx"
 
-url = "https://www.cpb.nl/sites/default/files/omnidownload/CPB-World-Trade-Monitor-April-2022.xlsx"
+url = "https://www.cpb.nl/sites/default/files/omnidownload/CPB-World-Trade-Monitor-November-2022.xlsx"
 
 download.file(url, destfile, mode = "wb")
+
 
 
 data <- read_excel(destfile,skip=1, sheet = 1)
@@ -28,11 +29,14 @@ names(data_n) <- str_replace_all(names(data_n), ":", "_")
 
 data_n = data_n[,-3]
 colnames(data_n)[2] = "Category"
-data_new = data_n %>%  tidyr::pivot_longer(!c("20_June_2022__13_37_32","Category"), names_to = "Year_Month", values_to = "Volumes")
+data_n$20_January_2023__15_43_07
+#data_new = data_n %>%  tidyr::pivot_longer(!c(data_n[1],"Category"), names_to = "Year_Month", values_to = "Volumes")
+data_new = data_n %>% 
+  tidyr::pivot_longer(!c(colnames(data_n)[1], "Category"), names_to = "Year_Month", values_to = "Volumes")
 
 
 
-data_to_use = data_new %>%  dplyr::rename("GEO" = "20_June_2022__13_37_32") 
+data_to_use = data_new %>%  dplyr::rename("GEO" = colnames(data_n)[1]) 
 
 
 data_to_use <- data_to_use %>%
@@ -58,18 +62,18 @@ Pdata_n = Pdata_n[,-3]
 colnames(Pdata_n)[2] = "Category"
 
 
-Pdata_new = Pdata_n %>%  tidyr::pivot_longer(!c("Prices___unit_values_in_usd","Category"), names_to = "Year_Month", values_to = "Prices")
+Pdata_new = Pdata_n %>%  tidyr::pivot_longer(!c(colnames(Pdata_n)[1],"Category"), names_to = "Year_Month", values_to = "Prices")
 
 
 
-Pdata_to_use = Pdata_new %>%  dplyr::rename("GEO" = Prices___unit_values_in_usd) 
+Pdata_to_use = Pdata_new %>%  dplyr::rename("GEO" = colnames(Pdata_n)[1]) 
 
 
 Pdata_to_use <- Pdata_to_use %>%
   mutate(Category = substr(Category,1,3))
 
 Final_Data = dplyr::left_join(data_to_use,Pdata_to_use, by = c("GEO","Category","Year_Month"))
-unique(Final_Data$Category)
+
 
 Final_Data = Final_Data %>% dplyr::mutate(Category = ifelse(Category == "tgz","World Trades",Category),
                                           Category = ifelse(Category == "mgz","World Imports",Category),
@@ -101,13 +105,12 @@ YearOverYear<-function (x,periodsPerYear){
 
 Final_Data = cbind(Final_Data,YoY_Prices=YearOverYear(Final_Data$Prices,12))
 Final_Data = cbind(Final_Data,YoY_Vol=YearOverYear(Final_Data$Volumes,12))
-Final_Data1 = Final_Data %>% dplyr::mutate(`Nominal Grwoth` = YoY_Prices+YoY_Vol)
+Final_Data = Final_Data %>% dplyr::mutate(`Nominal Grwoth` = YoY_Prices+YoY_Vol)
 
 
-Final_Data_to_print = Final_Data1 %>% dplyr::filter(Date>as.Date("2000-01-01"))
+Final_Data = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
 
 
+write.csv(Final_Data, file   = paste0("Data/Global_merchandise_trade.csv")  , row.names = F)
 
-#write_csv(Final_Data, file = "C:/Users/dsingh/Files to save/Global_merchandise_trade.csv")
-write.csv(Final_Data_to_print, file   = paste0("Data/Global_merchandise_trade.csv")  , row.names = F)
 
