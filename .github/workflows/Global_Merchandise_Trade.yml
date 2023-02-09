@@ -39,6 +39,7 @@ jobs:
     - name: Delete old file
       run: |
         Rscript -e 'unlink("Data/Global_Merchandise_Trade.csv")'
+        Rscript -e 'unlink("Data/Global_Merchandise_Trade.xlsx")'
         
     #- name: Remove file
     #  run: git rm Data/Global_Merchandise_Trade.xlsx
