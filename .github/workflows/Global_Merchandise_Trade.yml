@@ -43,7 +43,7 @@ jobs:
         
     - name: Delete old xlsx file
       run: |
-        Rscript -e 'try(unlink("Data/Global_merchandise_trade.csv"), silent = TRUE)'
+        Rscript -e 'try(unlink("Data/Global_Merchandise_Trade.xlsx"), silent = TRUE)'
 
         
     #- name: Remove file
