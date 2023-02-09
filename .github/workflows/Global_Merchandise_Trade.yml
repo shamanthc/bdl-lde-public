@@ -38,12 +38,12 @@ jobs:
         
     - name: Delete old csv file
       run: |
-        Rscript -e 'try(unlink("Data/Global_Merchandise_Trade.csv"), silent = TRUE)'
+        Rscript -e 'try(unlink("Data/Global_merchandise_trade.csv"), silent = TRUE)'
 
         
     - name: Delete old xlsx file
       run: |
-        Rscript -e 'try(unlink("Data/Global_Merchandise_Trade.csv"), silent = TRUE)'
+        Rscript -e 'try(unlink("Data/Global_merchandise_trade.csv"), silent = TRUE)'
 
         
     #- name: Remove file
