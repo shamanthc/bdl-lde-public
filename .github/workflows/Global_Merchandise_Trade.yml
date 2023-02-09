@@ -7,18 +7,18 @@
 # additional example workflows available for the R community.
 
 
-# Daily scraping
-name: Global Merchandise Trade
-
-on:
-  schedule:
-    - cron: "0 2 * * *" # every day at 2 am
- 
+## Daily scraping
+#name: Global Merchandise Trade
+#
 #on:
-#  push:
-#   branches: [main, master]
-#  pull_request:
-#    branches: [main, master]
+#  schedule:
+#    - cron: "0 2 * * *" # every day at 2 am
+ 
+on:
+  push:
+   branches: [main, master]
+  pull_request:
+    branches: [main, master]
 
 
 jobs:
@@ -34,11 +34,11 @@ jobs:
     # Set-up R
     - name: Install packages
       run: |
-        R -e 'install.packages("dplyr")'
+        Rscript -e "install.packages(c('dplyr', 'stringr','readxl','janitor'), repos='https://cloud.r-project.org')"
         
     - name: Delete old file
       run: |
-        R -e 'unlink("Data/Global_Merchandise_Trade.xlsx")'
+        Rscript -e 'unlink("Data/Global_Merchandise_Trade.xlsx")'
         
     #- name: Remove file
     #  run: git rm Data/Global_Merchandise_Trade.xlsx
