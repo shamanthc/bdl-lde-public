@@ -109,5 +109,5 @@ Final_Data = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
 
 
 #write_csv(Final_Data, file = "C:/Users/dsingh/Files to save/Global_merchandise_trade.csv")
-write.csv(Final_Data, file   = paste0("Global_merchandise_trade.csv")  , row.names = F)
+write.csv(Final_Data, file   = paste0("Data/Global_merchandise_trade.csv")  , row.names = F)
 
