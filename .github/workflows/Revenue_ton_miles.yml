@@ -8,17 +8,17 @@
 
 
 # Hourly scraping
-name: Revenue ton miles
-
-on:
-  schedule:
-    - cron: "0 5 * * *" # every day at 5 am
- 
+#name: Revenue ton miles
+#
 #on:
-#  push:
-#    branches: [main, master]
-#  pull_request:
-#    branches: [main, master]
+#  schedule:
+#    - cron: "0 5 * * *" # every day at 5 am
+ 
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 
 
 jobs:
