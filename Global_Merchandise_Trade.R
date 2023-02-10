@@ -108,9 +108,9 @@ Final_Data = cbind(Final_Data,YoY_Vol=YearOverYear(Final_Data$Volumes,12))
 Final_Data = Final_Data %>% dplyr::mutate(`Nominal Grwoth` = YoY_Prices+YoY_Vol)
 
 
-Final_Data = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
+Final_Data1 = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
 
 
-write.csv(Final_Data, file   = paste0("Data/Global_merchandise_trade.csv")  , row.names = F)
+write.csv(Final_Data1, file   = paste0("Data/Global_merchandise_trade_V2.csv")  , row.names = F)
 
 
