@@ -1,0 +1,59 @@
+.myClass { 
+        font-size: 28px;
+        line-height: 50px;
+        min-height: 25px!important;
+        line-height: 40px;
+		align: center;
+        text-align: center;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        padding: 0 15px;
+        overflow: hidden;
+        color: #4F4E4E;
+      }
+
+        /* logo */
+        .skin-blue .main-header .logo {
+                              background-color: #FFFFFF;
+                              }
+
+        /* logo when hovered */
+        .skin-blue .main-header .logo:hover {
+                              background-color: #FFFFFF;
+                              }
+
+        /* navbar (rest of the header) */
+        .skin-blue .main-header .navbar {
+                              background-color: #FFFFFF;
+                              }        
+
+        /* main sidebar */
+        .skin-blue .main-sidebar {
+                              background-color: #FFFFFF;
+                              }
+                              
+        .skin-blue .sidebar a{ 
+                      color: #4F4E4E;}
+
+        /* active selected tab in the sidebarmenu */
+        .skin-blue .main-sidebar .sidebar .sidebar-menu .active a{
+                              background-color: #ecf0f5;
+                              color: #00B9B4;
+                              }
+                              
+
+      
+		/* change select input text color*/				  
+     label{color: #4F4E4E;}
+
+
+		 
+		 /* align radio button with text*/	
+		label{
+          float:left;
+        }
+        
+    /*.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
+    color: blue;
+    background: #1e282c;
+    border-left-color: #3c8dbc;*/
+}
