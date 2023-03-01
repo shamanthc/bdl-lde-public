@@ -77,7 +77,7 @@ Hotel_occupancy_rate <- rbind(dt1, dt2, dt3, dt4, dt5, dt6)%>% dplyr::mutate("Ty
 
 
 # First 10 provinces
-url_link1 <- "http://www.mtc-currentperformance.com/HotelDataXML.aspx?querytype=1&type=csv&sy=2001&sm=1&ey=2022&em=8&MS=1&GA=1,2,3,4,5,6,7,8,9,10&PR=&PSR="
+url_link1 <- "http://www.mtc-currentperformance.com/HotelDataXML.aspx?querytype=1&type=csv&sy=2001&sm=1&ey=2022&em=8&MS=2&GA=1,2,3,4,5,6,7,8,9,10&PR=&PSR="
 
 # next 10 cities
 url_link2 <- "http://www.mtc-currentperformance.com/HotelDataXML.aspx?querytype=1&type=csv&sy=2001&sm=1&ey=2022&em=12&MS=2&GA=&PR=1,2,3,4,5,6,&PSR=a0,a1,b0,b1,"
