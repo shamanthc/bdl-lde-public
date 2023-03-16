@@ -6,7 +6,7 @@ library(readxl)
 
 destfile <- "Data/Global_Merchandise_Trade.xlsx"
 
-url = "https://www.cpb.nl/sites/default/files/omnidownload/CPB-World-Trade-Monitor-November-2022.xlsx"
+url = "https://www.cpb.nl/sites/default/files/omnidownload/CPB-World-Trade-Monitor-December-2022.xlsx"
 
 download.file(url, destfile, mode = "wb")
 
@@ -111,4 +111,4 @@ Final_Data = Final_Data %>% dplyr::mutate(`Nominal Grwoth` = YoY_Prices+YoY_Vol)
 Final_Data1 = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
 
 
-write.csv(Final_Data1, file   = paste0("Data/Global_merchandise_trade_V2.csv")  , row.names = F)
+write.csv(Final_Data1, file   = paste0("Data/Global_merchandise_trade_V3.csv")  , row.names = F)
