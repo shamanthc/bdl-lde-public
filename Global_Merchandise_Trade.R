@@ -101,16 +101,14 @@ YearOverYear<-function (x,periodsPerYear){
     return(c(rep(NA,periodsPerYear),(x[indexes+periodsPerYear]-x[indexes])/x[indexes]))
   }
 }
-
+Final_Data$Volumes = as.numeric(Final_Data$Volumes)
+Final_Data$Prices = as.numeric(Final_Data$Prices)
 
 Final_Data = cbind(Final_Data,YoY_Prices=YearOverYear(Final_Data$Prices,12))
 Final_Data = cbind(Final_Data,YoY_Vol=YearOverYear(Final_Data$Volumes,12))
 Final_Data = Final_Data %>% dplyr::mutate(`Nominal Grwoth` = YoY_Prices+YoY_Vol)
 
-
 Final_Data1 = Final_Data %>% dplyr::filter(Date>as.Date("2000-01-01"))
 
 
 write.csv(Final_Data1, file   = paste0("Data/Global_merchandise_trade_V2.csv")  , row.names = F)
-
-
