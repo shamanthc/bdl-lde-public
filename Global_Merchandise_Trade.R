@@ -92,13 +92,13 @@ Final_Data = Final_Data %>%  dplyr::rename("Date" = Year_Month)
 Final_Data$Prices = as.numeric(Final_Data$Prices)
 
 
-YearOverYear<-function (x,periodsPerYear){
+YYearOverYear<-function (x,periodsPerYear){
   if(NROW(x)<=periodsPerYear){
     stop("too few rows")
   }
   else{
-    indexes<-1:(NROW(Final_Data$Prices)-12)
-    return(c(rep(NA,12),(Final_Data$Prices[indexes+12]-Final_Data$Prices[indexes])/Final_Data$Prices[indexes]))
+    indexes<-1:(NROW(x)-periodsPerYear)
+    return(c(rep(NA,periodsPerYear),(x[indexes+periodsPerYear]-x[indexes])/x[indexes]))
   }
 }
 
