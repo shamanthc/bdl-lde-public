@@ -92,7 +92,7 @@ Final_Data = Final_Data %>%  dplyr::rename("Date" = Year_Month)
 Final_Data$Prices = as.numeric(Final_Data$Prices)
 
 
-YYearOverYear<-function (x,periodsPerYear){
+YearOverYear<-function (x,periodsPerYear){
   if(NROW(x)<=periodsPerYear){
     stop("too few rows")
   }
