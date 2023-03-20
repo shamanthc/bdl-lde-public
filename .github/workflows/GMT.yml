@@ -21,6 +21,8 @@ jobs:
       run: |
         R -e "install.packages(c('dplyr', 'tidyr', 'ggplot2'))"
     - name: Delete old CSV file
-      run: rm Global_merchandise_trade_V2.csv
+      run: |
+        cd Data
+        rm Global_merchandise_trade_V2.csv
     - name: Run R script
       run: Rscript Global_Merchandise_Trade.R
