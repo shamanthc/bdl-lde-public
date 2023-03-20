@@ -11,7 +11,6 @@ url = "https://www.cpb.nl/sites/default/files/omnidownload/CPB-World-Trade-Monit
 download.file(url, destfile, mode = "wb")
 
 
-
 data <- read_excel(destfile,skip=1, sheet = 1)
 data6 <- filter(data, rowSums(is.na(data)) != ncol(data))
 data6 <- data6[,colSums(is.na(data6))<nrow(data6)]
