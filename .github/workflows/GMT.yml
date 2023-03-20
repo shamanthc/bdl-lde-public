@@ -19,7 +19,7 @@ jobs:
         r-version: '4.2.3'
     - name: Install packages
       run: |
-        R -e "install.packages(c('dplyr', 'tidyr', 'janitor'))"
+        R -e "install.packages(c('dplyr', 'tidyr', 'janitor','readxl'))"
     - name: Delete old CSV file
       run: |
         cd Data
