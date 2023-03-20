@@ -1,0 +1,23 @@
+name: R script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v1
+      with:
+        r-version: '4.1.0'
+    - name: Install packages
+      run: |
+        R -e "install.packages(c('dplyr', 'tidyr', 'ggplot2'))"
+    - name: Delete old CSV file
+      run: rm Global_merchandise_trade_V2.csv
+    - name: Run R script
+      run: Rscript Global_Merchandise_Trade.R
