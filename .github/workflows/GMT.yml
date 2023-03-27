@@ -18,9 +18,9 @@ jobs:
     - name: Install packages
       run: |
         R -e "install.packages(c('dplyr', 'tidyr', 'janitor','readxl'))"
-    - name: Delete old CSV file
-      run: |
-        cd Data
-        rm Global_merchandise_trade_V2.csv
+  #  - name: Delete old CSV file
+  #    run: |
+  #      cd Data
+  #      rm Global_merchandise_trade_V2.csv
     - name: Run R script
       run: Rscript Global_Merchandise_Trade.R
