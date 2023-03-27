@@ -23,7 +23,7 @@ on:
 jobs:
   autoscrape:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Load repo and install R
     steps:
@@ -35,17 +35,17 @@ jobs:
       run: |
         Rscript -e "install.packages(c('dplyr', 'stringr','readxl','janitor'), repos='https://cloud.r-project.org')"
         
-    - name: Delete old csv file
-      run: |
-       if (file.exists("Data/Global_merchandise_trade.csv")) {
-        unlink("Data/Global_merchandise_trade.csv")
-       }
-    
-    - name: Delete old xlsx file
-      run: |
-       if (file.exists("Data/Global_Merchandise_Trade.xlsx")) {
-        unlink("Data/Global_Merchandise_Trade.xlsx")
-       }
+   # - name: Delete old csv file
+   #   run: |
+   #    if (file.exists("Data/Global_merchandise_trade.csv")) {
+   #     unlink("Data/Global_merchandise_trade.csv")
+   #    }
+   # 
+   # - name: Delete old xlsx file
+   #   run: |
+   #    if (file.exists("Data/Global_Merchandise_Trade.xlsx")) {
+   #     unlink("Data/Global_Merchandise_Trade.xlsx")
+   #    }
 
         
         
