@@ -7,7 +7,7 @@
 # additional example workflows available for the R community.
 
 
- Hourly scraping
+# Hourly scraping
 name: Revenue ton miles
 
 #on:
@@ -24,7 +24,7 @@ on:
 jobs:
   autoscrape:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Load repo and install R
     steps:
