@@ -1,6 +1,4 @@
-name: R script
-
-
+name: R script for GMT
 
 on:
   push:
