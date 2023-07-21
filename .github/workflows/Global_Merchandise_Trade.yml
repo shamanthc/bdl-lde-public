@@ -7,17 +7,17 @@
 # additional example workflows available for the R community.
 
 
-# Daily scraping
-# name: Global Merchandise Trade
-# on:
-#  schedule:
-#    - cron: "0 2 * * *" # every day at 4 am
+ Daily scraping
+ name: Global Merchandise Trade
+ on:
+  schedule:
+    - cron: "0 2 * * *" # every day at 4 am
 
-on:
-  push:
-   branches: [main, master]
-  pull_request:
-    branches: [main, master]
+#on:
+#  push:
+#   branches: [main, master]
+#  pull_request:
+#    branches: [main, master]
 
 
 jobs:
