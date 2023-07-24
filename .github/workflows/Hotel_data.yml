@@ -10,16 +10,16 @@
 # Daily scraping
 name: Hotel data
 
-#on:
-#  schedule:
-#    - cron: "0 1 * * *" # every day at 1 am
- 
 on:
- push:
-    branches: [main, master]
- pull_request:
-    branches: [main, master]
+  schedule:
+    - cron: "0 1 * * *" # every day at 1 am
 
+#on:
+# push:
+#    branches: [main, master]
+# pull_request:
+#    branches: [main, master]
+#
 
 jobs:
   autoscrape:
