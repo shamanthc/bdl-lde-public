@@ -1,16 +1,19 @@
 #destfile <- "Data/Revenue_ton_miles.xlsx"
 #
 #url = "https://www.cn.ca/-/media/Files/Investors/Investor-Performance-Measures/CN-BU-WEBSUMMARYpv.xlsx"
+#https://www.cn.ca/-/media/files/investors/investor-performance-measures/cn-bu-websummary.xlsx
 #download.file(url, destfile, mode = "wb")
 
 library(readxl)
 library(dplyr)
 library(janitor)
+# Load the stringr package
+library(stringr)
 
 destfile <- "Data/Revenue_ton_miles_V2.xlsx"
 
 
-url = "https://www.cn.ca/-/media/Files/Investors/Investor-Performance-Measures/CN-BU-WEBSUMMARYpv.xlsx"
+url = "https://www.cn.ca/-/media/files/investors/investor-performance-measures/cn-bu-websummary.xlsx"
 
 download.file(url, destfile, mode = "wb")
 
@@ -106,7 +109,32 @@ df_2023 = df_2023 %>% tidyr::pivot_longer(!c(Year,Week), names_to = "Industry", 
 
 
 
-Collected = rbind(df_2019,df_2020,df_2021,df_2022,df_2023)
 
+##2024
+df_2024 <- read_excel(destfile,
+                      sheet = "2024",
+                      skip = 1,
+                      n_max = 20)
+df_2024 <- tail(df_2024,-12)
+df_2024 <- t(df_2024)
+
+df_2024 <- janitor::row_to_names(df_2024, row_number = 1)
+
+df_2024 <- as.data.frame(df_2024)
+df_2024 <- tibble::rownames_to_column(df_2024, "Week")%>% dplyr::mutate("Year" = "2024")
+
+
+
+df_2024 = df_2024 %>% tidyr::pivot_longer(!c(Year,Week), names_to = "Industry", values_to = "Revenue")
+
+
+
+Collected = rbind(df_2019,df_2020,df_2021,df_2022,df_2023,df_2024)
+
+Collected <- Collected %>%
+  dplyr::mutate(Week = paste0("Week ", Week))
+
+Collected$Industry <-  str_trim(sub("\\\\.*", "", Collected$Industry), side = "right")
+Collected$Industry <- ifelse(Collected$Industry == "RTMs","RTMs TOTAL", Collected$Industry)
 #savepath2 = "C:/Users/dsingh/Files to save"
 write.csv(Collected, file   = paste0("Data/Revenue_ton_mile_V2.csv")  , row.names = F)
