@@ -12,7 +12,7 @@
 #on:
 # schedule:
 #   - cron: "0 2 * * *" # every day at 4 am
-
+FORCE_JAVASCRIPT_ACTIONS_TO_NODE20=true
 on:
   push:
    branches: [main, master]
