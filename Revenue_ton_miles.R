@@ -1,9 +1,3 @@
-#destfile <- "Data/Revenue_ton_miles.xlsx"
-#
-#url = "https://www.cn.ca/-/media/Files/Investors/Investor-Performance-Measures/CN-BU-WEBSUMMARYpv.xlsx"
-#https://www.cn.ca/-/media/files/investors/investor-performance-measures/cn-bu-websummary.xlsx
-#download.file(url, destfile, mode = "wb")
-
 library(readxl)
 library(dplyr)
 library(janitor)
@@ -146,7 +140,7 @@ Collected$Source <- "CN"
 destfile <- "Data/Revenue_ton_miles_V2_CPKC.xlsx"
 
 
-url = "https://s21.q4cdn.com/736796105/files/doc_downloads/key-metrics/weekly/2024/08/19/CPKC-Weekly-RTMs-and-Carloads-2024.xlsx"
+url = "https://s21.q4cdn.com/736796105/files/doc_downloads/2024/08/CPKC-Weekly-RTMs-and-Carloads-2024-1.xlsx"
 
 download.file(url, destfile, mode = "wb")
 
