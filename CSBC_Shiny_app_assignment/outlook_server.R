@@ -1,17 +1,5 @@
+
 outlook_server <- function(input, output, session) {
-  
-  # read tables
-  #=============
-  # check that outlook options are correctly spelled (i.e.somewhat pessimistic and not soemwhat pessimistic )  
-  outlook_Q4_22 <- cansim::get_cansim("33100630")%>%  dplyr::mutate(Quarter = "Q4 2022")
-  outlook_Q3_22 <- cansim::get_cansim("33100567")%>%  dplyr::mutate(Quarter = "Q3 2022")
-  outlook_Q1_22 <- cansim::get_cansim("33100488")%>%  dplyr::mutate(Quarter = "Q1 2022")
-  outlook_Q4_21 <- cansim::get_cansim("33100426")%>%  dplyr::mutate(Quarter = "Q4 2021")
-  outlook_Q3_21 <- cansim::get_cansim("33100393")%>%  dplyr::mutate(Quarter = "Q3 2021")
-  
-  
-  
-  
   
   data_outlook1 <- reactive({
     
@@ -22,14 +10,14 @@ outlook_server <- function(input, output, session) {
     outlook_Q3_2022_table <- "33-10-0630"
     this_quarter <- "Q4 2022"
     
-    # # read tables
-    # #=============
-    # # check that outlook options are correctly spelled (i.e.somewhat pessimistic and not soemwhat pessimistic )  
-    # outlook_Q4_22 <- cansim::get_cansim("33100630")%>%  dplyr::mutate(Quarter = "Q4 2022")
-    # outlook_Q3_22 <- cansim::get_cansim("33100567")%>%  dplyr::mutate(Quarter = "Q3 2022")
-    # outlook_Q1_22 <- cansim::get_cansim("33100488")%>%  dplyr::mutate(Quarter = "Q1 2022")
-    # outlook_Q4_21 <- cansim::get_cansim("33100426")%>%  dplyr::mutate(Quarter = "Q4 2021")
-    # outlook_Q3_21 <- cansim::get_cansim("33100393")%>%  dplyr::mutate(Quarter = "Q3 2021")
+    # read tables
+    #=============
+    # check that outlook options are correctly spelled (i.e.somewhat pessimistic and not soemwhat pessimistic )  
+    outlook_Q4_22 <- cansim::get_cansim("33100630")%>%  dplyr::mutate(Quarter = "Q4 2022")
+    outlook_Q3_22 <- cansim::get_cansim("33100567")%>%  dplyr::mutate(Quarter = "Q3 2022")
+    outlook_Q1_22 <- cansim::get_cansim("33100488")%>%  dplyr::mutate(Quarter = "Q1 2022")
+    outlook_Q4_21 <- cansim::get_cansim("33100426")%>%  dplyr::mutate(Quarter = "Q4 2021")
+    outlook_Q3_21 <- cansim::get_cansim("33100393")%>%  dplyr::mutate(Quarter = "Q3 2021")
     
     colnames(outlook_Q4_22)= colnames(outlook_Q1_22)
     colnames(outlook_Q3_22)= colnames(outlook_Q1_22)
@@ -43,19 +31,19 @@ outlook_server <- function(input, output, session) {
                           outlook_Q1_22,
                           outlook_Q4_21,
                           outlook_Q3_21)
-    
+      
     
     data_outlook1 <- Data_cleaning_function_round1(data_outlook)%>%
       dplyr::rename(Outlook = Future_outlook_of_the_business_or_organization)%>%
       left_join(Business_characterisitcs_mapping, by="Business_characteristics")%>%
       dplyr::filter(GEO==input$geo,
-      )%>%
+                    )%>%
       mutate(Outlook = gsub("Future outlook of the business or organization, ","", as.character(Outlook)),
              Outlook = gsub("Future outlook, ","", as.character(Outlook)),
              Outlook = ifelse(Outlook == "Future outlook of the business or organization is unknown", "Unknown", Outlook),
              Outlook = ifelse(Outlook == "soemwhat pessimistic", "somewhat pessimistic", Outlook),
              Outlook1 = ifelse(Outlook == "very optimistic"| Outlook == "somewhat optimistic", "Optimistic", ifelse(Outlook == "very pessimistic"| Outlook == "somewhat pessimistic","Pessimistic", "Unknown")) 
-      )%>%
+             )%>%
       group_by(Business_characteristics, Outlook1, Quarter)%>%
       mutate(sum_value = sum(VALUE))
     
@@ -72,11 +60,11 @@ outlook_server <- function(input, output, session) {
     #outlook_Q3_2022_table <- "33-10-0567"
     # data with both optimistic and pessimistic
     thisData <- data_outlook1()%>%
-      dplyr::select(-Outlook, -VALUE)%>%
+      select(-Outlook, -VALUE)%>%
       unique()%>%
       dplyr::filter(#Business_characteristics == "All Industries",
-        Clean ==input$business_characteristics,
-        Outlook1 %in% c("Optimistic", "Pessimistic"))%>% 
+                    Clean ==input$specific_business_characteristics,
+                    Outlook1 %in% c("Optimistic", "Pessimistic"))%>% 
       unique()%>%
       mutate(label1 = paste0(Outlook1,", ", round(sum_value),"%"))
     
@@ -88,11 +76,11 @@ outlook_server <- function(input, output, session) {
     
     
     ggplot(thisData, aes(x = factor(Quarter, level = level_order), y = sum_value,
-                         group = Outlook1, colour = Outlook1, label = Outlook1)) +
+                                          group = Outlook1, colour = Outlook1, label = Outlook1)) +
       geom_line(size=1.2)+
       geom_point(size=2.5)+
       geom_hline(yintercept=0,  color="#4F4E4E")+
-      geom_dl(data = subset(thisData, Quarter== last_quarter),aes(label = label1, colour=Outlook1), method = list(dl.trans(x = x + .2), "last.points", cex = 1.2, color="#4F4E4E"))+
+      geom_dl(data = subset(thisData, Quarter== last_quarter),aes(label = label1, colour=Outlook1), method = list(dl.trans(x = x + .2), "last.bumpup",cex = 1.2, color="#4F4E4E"))+
       xlab("")+
       ylab("")+
       expand_limits(x= c(1, 6), y=c(60,80))+
@@ -143,7 +131,7 @@ outlook_server <- function(input, output, session) {
     
     # data_outlook2 <- data_outlook1%>%
     data_outlook2 <- data_outlook1()%>%
-      dplyr::filter(Quarter == this_quarter,
+      filter(Quarter == this_quarter,
              Outlook %in% c("very optimistic", "somewhat optimistic"),
              sum_value >0) %>%
       ungroup()%>%
@@ -154,7 +142,7 @@ outlook_server <- function(input, output, session) {
                                         Clean == "All business activities in the last 12 months"~ 2,
                                         TRUE ~1),
              Outlook = firstup(Outlook))%>%
-      dplyr::select(-Outlook1, -sum_value)%>%
+      select(-Outlook1, -sum_value)%>%
       group_by(Business_characteristics)%>%
       mutate(tot=sum(VALUE))%>%
       arrange(desc(tot))
@@ -162,7 +150,7 @@ outlook_server <- function(input, output, session) {
     
     
     #====
-    if(business_characteristics_choices == "All Industries"){
+    if(input$business_characteristics == "All industries"){
       data_outlook2 <- data_outlook2 %>%
         dplyr::filter( Business_characteristics %in% Industries)%>%
         mutate(Business_characteristics = case_when( 
@@ -185,7 +173,7 @@ outlook_server <- function(input, output, session) {
           Business_characteristics == "Other services (except public administration) [81]"                          ~ "Other services",
           TRUE ~ "Error"))%>%
         arrange(VALUE)
-    }else if(business_characteristics_choices == "All employment sizes"){
+    }else if(input$business_characteristics == "All employment sizes"){
       
       data_outlook2 <- data_outlook2 %>%
         dplyr::filter(Business_characteristics %in% Employment_size)%>%
@@ -194,7 +182,7 @@ outlook_server <- function(input, output, session) {
           TRUE ~ as.character(Business_characteristics)))%>%
         arrange(VALUE)
       
-    }else if(business_characteristics_choices == "All ownerships"){
+    }else if(input$business_characteristics == "All ownerships"){
       data_outlook2 <- data_outlook2 %>%
         dplyr::filter( Business_characteristics %in% Majority_Ownership)%>%
         mutate(Business_characteristics = case_when( 
@@ -208,7 +196,7 @@ outlook_server <- function(input, output, session) {
         arrange(VALUE)
       
       
-    }else if(business_characteristics_choices == "All visible minorities"){
+    }else if(input$business_characteristics == "All visible minorities"){
       
       data_outlook2 <- data_outlook2 %>%
         dplyr::filter(Business_characteristics %in% Ownership_minority)%>%
@@ -242,11 +230,11 @@ outlook_server <- function(input, output, session) {
     #====
     
     
-    if(business_characteristics_choices == "All Industries"){
+    if(input$business_characteristics == "All industries"){
       fac_order <- data_outlook2 %>%
         filter(Business_characteristics != "All Industries") %>%
         arrange(tot) %>% 
-        dplyr::select(Business_characteristics)%>%unique()%>%
+        select(Business_characteristics)%>%unique()%>%
         pull(Business_characteristics)
       
       fac_order <- c(fac_order, "All Industries")
@@ -256,16 +244,16 @@ outlook_server <- function(input, output, session) {
       
       business_char <- "by industry"
       
-    }else if(business_characteristics_choices == "All employment sizes"){
+    }else if(input$business_characteristics == "All employment sizes"){
       fac_order <- c("1 to 4 employees" ,"5 to 19 employees","20 to 99 employees","100 or more employees", "All employment sizes")
       this_face   <- ifelse(fac_order  == "All employment sizes", "bold", "plain")
       this_color  <- ifelse(fac_order  == "All employment sizes", "#4F4E4E", "gray25")
       business_char <- "by employment size"
       
-    }else if(business_characteristics_choices == "All ownerships"){
+    }else if(input$business_characteristics == "All ownerships"){
       fac_order <- data_outlook2 %>%
         filter(Business_characteristics != "All ownerships") %>%
-        arrange(tot) %>% dplyr::select(Business_characteristics)%>%unique()%>%
+        arrange(tot) %>% select(Business_characteristics)%>%unique()%>%
         pull(Business_characteristics)
       
       
@@ -276,10 +264,10 @@ outlook_server <- function(input, output, session) {
       
       business_char <- "by majority owned"
       
-    }else if(business_characteristics_choices == "All visible minorities"){
+    }else if(input$business_characteristics == "All visible minorities"){
       fac_order <- data_outlook2 %>%
         filter(Business_characteristics != "Ownership by all visible minorities") %>%
-        arrange(tot) %>% dplyr::select(Business_characteristics)%>%unique()%>%
+        arrange(tot) %>% select(Business_characteristics)%>%unique()%>%
         pull(Business_characteristics)
       
       
@@ -293,7 +281,7 @@ outlook_server <- function(input, output, session) {
     }else{
       fac_order <- data_outlook2 %>%
         filter( Business_characteristics != "All business activities in the last 12 months") %>%
-        arrange(tot) %>% dplyr::select(Business_characteristics)%>%unique()%>%
+        arrange(tot) %>% select(Business_characteristics)%>%unique()%>%
         pull(Business_characteristics)
       
       
@@ -311,14 +299,14 @@ outlook_server <- function(input, output, session) {
     
     
     data_total <- data_outlook2 %>% group_by(Business_characteristics)%>%mutate(tot=sum(VALUE))%>%
-      dplyr::select(Business_characteristics, tot)%>%
+      select(Business_characteristics, tot)%>%
       unique()%>%filter(Business_characteristics %in% fac_order)%>%
       arrange(desc(tot))
     
     this_family <- "sans"
     
     ggplot(data_outlook2, aes(fill = Outlook, y = VALUE,
-                              x=factor(Business_characteristics, levels = fac_order) )) +
+                                               x=factor(Business_characteristics, levels = fac_order) )) +
       geom_bar(stat="identity", width=0.6, position="stack")+
       
       geom_text(aes(label=paste0(round(VALUE),"%")), position = position_stack(vjust = 0.5), size=5, color="white", fontface=2) +
@@ -354,15 +342,13 @@ outlook_server <- function(input, output, session) {
         legend.position =c(0.4, 0) ,
         legend.direction = "horizontal"
       ) #+
-    # annotate("text", x=5, y=100, label= paste("Most Optimistic\n(top 3)"), colour = "#00B9B4", fontface = "bold")+
-    # annotate("text", x=2, y=100, label= paste("Least Optimistic\n(bottom 3)"), colour = "#FE4812", fontface = "bold" )
+      # annotate("text", x=5, y=100, label= paste("Most Optimistic\n(top 3)"), colour = "#00B9B4", fontface = "bold")+
+      # annotate("text", x=2, y=100, label= paste("Least Optimistic\n(bottom 3)"), colour = "#FE4812", fontface = "bold" )
     
     
     
     
   })
-  
-  
   
   
 }
